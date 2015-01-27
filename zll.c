@@ -78,39 +78,6 @@ void ll_destroy(LinkedList list) {
 	return;
 }
 
-/** Gets the maximum size of a list
- * @param list		The list to get the size of
- * @return The maximum number of items list can hold
- */
-inline int ll_getMaximumSize(LinkedList list) {
-	return list->size;
-}
-
-/** Gets the first free index of a list
- * @param list		The list to get the index of
- * @return The first free index of list, or -1 if list is full
- */
-inline int ll_getFirstFreeIndex(LinkedList list) {
-	return list->first_free;
-}
-
-/** Fetches a pointer at an index
- * @param list		The list to fetch from
- * @param index		The index to fetch
- * @return The pointer at index, or NULL if index is unused
- */
-inline void* ll_get(LinkedList list, int index) {
-	return list->list[index];
-}
-
-/** Removes an item from a list
- * @param list		The list to remove the item from
- * @param index		The index to remove
- */	
-inline void ll_remove(LinkedList list, int index) {
-	list->list[index] = NULL;
-}
-
 /** Sets the item at an index to a specified value
  * @param list		The list to set the item in
  * @param index		The index to set
