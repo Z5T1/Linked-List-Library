@@ -7,7 +7,7 @@ int main() {
 	int i;
 	LinkedList ll;
 	
-	ll = ll_createDynamicCustom();
+	ll = ll_createDynamicCustom(4);
 	
 	printf("%i\t", ll_put(ll, "Hello,"));
 	printf("%i\t", ll_put(ll, "World!"));
