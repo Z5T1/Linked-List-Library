@@ -4,8 +4,8 @@
 #define SLOT_INC_AMMOUNT 16
 
 /** Gets the first free index of a list
- * @param list list to get index of
- * @return index, or -1 if list is full
+ * @param list		List to get index of
+ * @return Index, or -1 if list is full
  */
 static int recalculateFirstFreeIndex(LinkedList list) {
 	int i;
@@ -20,8 +20,8 @@ static int recalculateFirstFreeIndex(LinkedList list) {
 
 /** Creates a new linked list with a constant (static) size. The
  * resulting linked list must be freed with ll_destroy().
- * @param size the number of slots for this list
- * @return a new linked list
+ * @param size		The number of slots for this list
+ * @return A new linked list
  */
 LinkedList ll_create(int size) {
 	LinkedList list = malloc(sizeof(struct LinkedList_s));
@@ -37,7 +37,7 @@ LinkedList ll_create(int size) {
 
 /** Creates a new linked list with a variable (dynamic) size. The
  * resulting linked list must be freed with ll_destroy().
- * @return a new linked list
+ * @return A new linked list
  */
 LinkedList ll_createDynamic() {
 	LinkedList list = malloc(sizeof(struct LinkedList_s));
@@ -54,7 +54,7 @@ LinkedList ll_createDynamic() {
 /** Creates a new linked list with a variable (dynamic) size. The
  * resulting linked list must be freed with ll_destroy().
  * @param growth_rate	The ammount by which to grow the list
- * @return a new linked list
+ * @return A new linked list
  */
 LinkedList ll_createDynamicCustom(int growth_rate) {
 	LinkedList list = malloc(sizeof(struct LinkedList_s));
@@ -69,7 +69,7 @@ LinkedList ll_createDynamicCustom(int growth_rate) {
 }
 
 /** Destroys (deallocates) a linked list
- * @param list the list to be destroyed
+ * @param list		The list to be destroyed
  */
 void ll_destroy(LinkedList list) {
 	free(list->list);
@@ -79,34 +79,58 @@ void ll_destroy(LinkedList list) {
 }
 
 /** Gets the maximum size of a list
- * @param list the list to get the size of
- * @return the maximum number of items list can hold
+ * @param list		The list to get the size of
+ * @return The maximum number of items list can hold
  */
 inline int ll_getMaximumSize(LinkedList list) {
 	return list->size;
 }
 
 /** Gets the first free index of a list
- * @param list the list to get the index of
- * @return the first free index of list, or -1 if list is full
+ * @param list		The list to get the index of
+ * @return The first free index of list, or -1 if list is full
  */
 inline int ll_getFirstFreeIndex(LinkedList list) {
 	return list->first_free;
 }
 
 /** Fetches a pointer at an index
- * @param list the list to fetch from
- * @param index the index to fetch
- * @return the pointer at index, or NULL if index is unused
+ * @param list		The list to fetch from
+ * @param index		The index to fetch
+ * @return The pointer at index, or NULL if index is unused
  */
 inline void* ll_get(LinkedList list, int index) {
 	return list->list[index];
 }
 
+/** Removes an item from a list
+ * @param list		The list to remove the item from
+ * @param index		The index to remove
+ */	
+inline void ll_remove(LinkedList list, int index) {
+	list->list[index] = NULL;
+}
+
+/** Sets the item at an index to a specified value
+ * @param list		The list to set the item in
+ * @param index		The index to set
+ * @param ptr		The pointer to set the index to
+ * @return 0 on success, or -1 if the index is out of bounds
+ */
+int ll_set(LinkedList list, int index, void* ptr) {
+	if (index < list->size) {
+		list->list[index] = ptr;
+		return 0;
+	}
+	else {
+		return -1;
+	}
+}
+
 /** Adds a pointer to a list
- * @param list the list to add to
- * @param ptr the pointer to add
- * @return index of pointer on success, -1 if list is full
+ * @param list		The list to add to
+ * @param ptr		The pointer to add
+ * @return Index of pointer on success, -1 if list is full
  */
 int ll_put(LinkedList list, void* ptr) {
 	int i = ll_getFirstFreeIndex(list);
